@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title >标题</title>
+</head>
+<body>
+<h1>发送去邮箱的内容</h1>
+<h1 th:text="${message}">hello</h1>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script>
+    function createXMLHttpRequest() {
+        if (window.XMLHttpRequest) {
+            XMLHttpR = new XMLHttpRequest();
+        } else if (window.ActiveXObject) {
+            try {
+                XMLHttpR = new ActiveXObject("Msxml2.XMLHTTP");
+            } catch (e) {
+                try {
+                    XMLHttpR = new ActiveXObject("Microsoft.XMLHTTP");
+                } catch (e) {}
+            }
+        }
+    }
+
+    function sendRequest(url) {
+        createXMLHttpRequest();
+        XMLHttpR.open("POST", url, true);
+        XMLHttpR.setRequestHeader("Content-Type", "text/html;charset=utf-8");
+        XMLHttpR.onreadystatechange = processResponse;
+        XMLHttpR.send(null);
+    }
+
+    function processResponse() {
+        if (XMLHttpR.readyState == 4 && XMLHttpR.status == 200) {
+            document.write(XMLHttpR.responseText);
+        }
+    }
+    sendRequest("/success")
+</script>
+<body>
+</body>
+</html>
